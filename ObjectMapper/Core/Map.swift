@@ -165,6 +165,14 @@ public extension Map {
 		return array
 	}
 	
+	/// Set of Mappable objects
+	public func valueOrFail<T: Mappable>() throws -> Set<T> {
+		guard let set = Mapper<T>().mapSet(currentValue) else {
+			throw MapperError.error
+		}
+		return set
+	}
+	
 	/// Optional Array of Mappable objects
 	public func value<T: Mappable>() -> [T]? {
 		return Mapper<T>().mapArray(currentValue)
